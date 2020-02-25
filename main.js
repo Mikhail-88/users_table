@@ -130,6 +130,35 @@ function initTable(tableSchema, items) {
   table.appendChild(body);
   table.appendChild(total);
   container.appendChild(table);
+  container.insertAdjacentHTML('beforeend', `
+    <button type="button" class="btn btn-primary">Sort</button>
+  `);
 }
 
 initTable(tableSchema, users);
+
+const table = document.querySelector('.table');
+const bodyRows = table.tBodies[0].rows;
+const button = document.querySelector('.btn');
+let count = 0;
+
+button.addEventListener('click', () => {
+  const filtered = [ ...bodyRows ];
+
+  filtered.sort((a, b) => {
+    const aValue = a.cells[3].innerHTML;
+    const bValue = b.cells[3].innerHTML;
+
+    return +aValue - +bValue;
+  });
+    
+  if (count % 2 === 0) {
+    filtered.reverse();
+  }
+
+  for (const tr of filtered) {
+    table.tBodies[0].append(tr);
+  }
+
+  count++;
+});

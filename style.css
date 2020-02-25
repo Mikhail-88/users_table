@@ -1,0 +1,14 @@
+.table-container {
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  width: 80px;
+  align-self: flex-end;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
